@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Añadir Alumno</h2>
+<div matDialogContent>
+       <form [formGroup]="alumnForm">
+         <div class="row">
+             <div class="col-6">
+                 <mat-form-field class="w-100">
+                     <mat-label>Nombre</mat-label>
+                     <input formControlName="firstName" matInput>    
+                 </mat-form-field>
+             </div>
+             <div class="col-6">
+                 <mat-form-field class="w-100">
+                     <mat-label>Apellido</mat-label>
+                     <input formControlName="lastName" matInput>    
+                 </mat-form-field>
+             </div>
+             <div class="col-12">
+                 <mat-form-field class="w-100">
+                     <mat-label>Curso</mat-label>
+                     <mat-select>
+                       <mat-option formControlName="course" value="option">1° A</mat-option>
+                       <mat-option formControlName="course" value="option">1° B</mat-option>
+                       <mat-option formControlName="course" value="option">1° C</mat-option>
+                     </mat-select>
+                   </mat-form-field>
+             </div>
+         </div>
+       </form>
+</div>
+
+<div class="d-flex justify-content-end" matDialogActions>
+    <button mat-dialog-close mat-button>Cancelar</button>
+    <button (click)="onSave()" mat-button>Guardar</button>
+</div>
