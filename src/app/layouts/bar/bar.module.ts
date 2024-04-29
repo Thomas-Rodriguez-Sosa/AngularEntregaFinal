@@ -7,6 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { BarRoutingModule } from './bar-routing.module';
 import { CursosModule } from './pages/cursos/cursos.module';
+import { AlumnosModule } from './pages/alumnos/alumnos.module';
+import {MatListModule} from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -20,6 +23,8 @@ import { CursosModule } from './pages/cursos/cursos.module';
     MatIconModule,
     CursosModule,
     MatButtonModule,
+    AlumnosModule,
+    MatListModule,
   ],
   exports: [
     BarComponent

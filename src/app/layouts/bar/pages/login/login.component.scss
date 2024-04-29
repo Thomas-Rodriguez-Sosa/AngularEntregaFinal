@@ -1,0 +1,75 @@
+* {
+    box-sizing: border-box;
+}
+
+.mainForm {
+    background-image: linear-gradient(rgba(20, 26, 2, 0.733),rgb(172, 227, 4)), url(../login/imgs/backgroundLibrary.jpg);
+    background-size: cover;
+    width: auto;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    width: 420px;
+    border: 2px solid gold;
+    padding: 32px 24px;
+    font-size: 14px;
+    display: flex;
+    position: fixed;
+    top: 80px;
+    bottom: 80px;
+    left: 100px;
+    right: 100px;
+    flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    
+    h2 {
+        align-items: center;
+        justify-content: center;
+        color: black;
+    }
+
+    label {
+        color: white;
+        display: block;
+        margin-bottom: 4px;
+        color: black;
+        font-weight: 600px;
+        font-size: 13px;
+    }
+    .form-control {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 8px;
+        color: black;
+        background-color: transparent;
+        border: 1px solid gold;
+    }
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .button:active {
+            scale: 0.95s;
+        }
+        .form-submit-button {
+            color: gray;
+            font-weight: 600;
+            width: 40%;
+            background: black;
+            border: 1px solid #414141;
+            padding: 12px 16px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        .form-submit-button:hover {
+            color: gold;
+            background-color: black;
+            border-color: gray;
+        }
+    }
+
+}

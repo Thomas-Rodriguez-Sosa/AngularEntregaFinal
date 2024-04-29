@@ -10,7 +10,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class AlumnosDialogComponent {
   static nextId = 3;
   alumnForm: FormGroup;
-  cursos = ['1° A', '1° B', '1° C'] 
+  cursos = [
+    {value: '1°A', viewValue: '1°A'},
+    {value: '1°B', viewValue: '1°B'},
+    {value: '1°C', viewValue: '1°C'}
+  ]
 
   constructor(private formBuilder:FormBuilder, private matDialogRef:MatDialogRef<AlumnosDialogComponent>) {
     this.alumnForm = this.formBuilder.group ({

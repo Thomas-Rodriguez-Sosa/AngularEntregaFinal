@@ -1,29 +1,32 @@
+<!-- SIDE BAR -->
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" [mode]="isMobile() ? 'over' : 'side'">
-      <p>IPEM 160</p>
-      @if (showFiller) {
-        <p>Lorem, ipsum dolor sit amet consectetur.</p>
-      }
-      <button (click)="showFiller = !showFiller" mat-raised-button>
-        Toggle extra text
-      </button>
+      <h2 class="w-100 m-100">IPEM 160</h2>
+      <mat-nav-list>
+        <a routerLink="home" mat-list-item>Inicio</a>
+        <a routerLink="cursos" mat-list-item>Contacto</a>
+      </mat-nav-list>
     </mat-drawer>
+
+<!-- TOOL BAR -->
     <mat-toolbar>
-        <button type="button" mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
+        <button type="button" mat-icon-button (click)="drawer.toggle()" class="example-icon">
           <mat-icon>menu</mat-icon>
         </button>
         <span class="fs-2">Hipolito Vieytes</span>
-        <span class="example-spacer"></span>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-          <mat-icon>favorite</mat-icon>
-        </button>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-          <mat-icon>share</mat-icon>
-        </button>
+        <span class="example-spacer">°</span>
+
+        <a (click)="logOut()">
+          <button mat-icon-button class="example-icon">
+            <mat-icon>login</mat-icon>
+          </button>
+        </a>
     </mat-toolbar>
+
+    <!-- MAIN START -->
+    
     <main style="padding: 15px;">
-    <app-cursos> 
-    </app-cursos>
+    <router-outlet></router-outlet>
     </main>
   </mat-drawer-container>
   
