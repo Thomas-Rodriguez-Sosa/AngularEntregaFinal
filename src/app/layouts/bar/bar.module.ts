@@ -9,6 +9,10 @@ import { BarRoutingModule } from './bar-routing.module';
 import { CursosModule } from './pages/cursos/cursos.module';
 import { AlumnosModule } from './pages/alumnos/alumnos.module';
 import {MatListModule} from '@angular/material/list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
+
 
 
 @NgModule({
@@ -21,6 +25,9 @@ import {MatListModule} from '@angular/material/list';
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
+    MatInputModule,
+    MatCardModule,
+    MatFormFieldModule,
     CursosModule,
     MatButtonModule,
     AlumnosModule,

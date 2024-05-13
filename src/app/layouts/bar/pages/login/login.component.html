@@ -1,6 +1,8 @@
 <div class="mainForm">
     <div class="container">
-        <form [formGroup]="formularioContacto" (ngSubmit)="onSubmit()" class="row g-3">
+      <mat-card>
+        <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="logIn()" class="row g-3">
           <h2 class="fw-bold">Iniciar Sesion</h2>
           <div class="col-md-6">
             <label for="inputName" class="form-label">Nombre</label>
@@ -14,6 +16,7 @@
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Correo Electronico</label>
               <input 
+              matInput
               formControlName="email" 
               type="email" 
               class="form-control" 
@@ -43,8 +46,12 @@
               </div>
             </div>
             <div class="button">
-              <button class="form-submit-button" type="submit">Iniciar Sesion</button>
+              <button class="form-submit-button" type="submit">
+                Iniciar Sesion
+              </button> 
             </div>
-        </form>
+          </form>
+        </mat-card-content>
+      </mat-card>
     </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../core/auth.service';
+import { AuthService } from './pages/auth/auth.service';
 import { Observable } from 'rxjs';
 import { IProfs } from './pages/cursos/models';
 import { Router } from '@angular/router';
@@ -20,16 +20,11 @@ export class BarComponent implements OnInit{
 
   ngOnInit(): void {}
 
-  logIn(): void {
-    this.authService.logIn();
-    this.router.navigate(['home'])
-  }
   logOut(): void {
     this.authService.logOut();
     this.router.navigate(['login']);
   }
 
-  
   isMobile (): boolean {
     return window.innerWidth <= 280;
   }

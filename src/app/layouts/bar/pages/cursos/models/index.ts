@@ -13,10 +13,9 @@ export interface ICursos {
     year: number;
 }
 export interface IProfs {
-    id: number;
-    firstName: string;
-    lastName: string;
+    nombre: string;
+    contraseña: string;
     email: string;
-    dni: number;
-    courses: string;
+    address: string;
+    role: string;
 }
