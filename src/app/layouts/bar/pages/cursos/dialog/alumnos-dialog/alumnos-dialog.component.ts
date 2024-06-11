@@ -1,11 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Alumnos } from '../../models';
 
 @Component({
   selector: 'app-alumnos-dialog',
   templateUrl: './alumnos-dialog.component.html',
-  styleUrl: './alumnos-dialog.component.scss'
+  styleUrl: './alumnos-dialog.component.scss',
+  template: `
+    <h2 mat-dialog-title>{{ data.title }}</h2>
+    <mat-dialog-content>
+      <form>
+        <mat-form-field>
+          <input matInput [(ngModel)]="data.firstName" placeholder="Nombre">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="data.lastName" placeholder="Apellido">
+        </mat-form-field>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="onSave()">Guardar</button>
+      <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Salir</button>
+    </mat-dialog-actions>
+  `,
 })
 export class AlumnosDialogComponent {
   static nextId = 3;
@@ -16,12 +34,12 @@ export class AlumnosDialogComponent {
     {value: '1°C', viewValue: '1°C'}
   ]
 
-  constructor(private formBuilder:FormBuilder, private matDialogRef:MatDialogRef<AlumnosDialogComponent>) {
+  constructor(private formBuilder:FormBuilder, public matDialogRef:MatDialogRef<AlumnosDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Alumnos,
+  ) {
     this.alumnForm = this.formBuilder.group ({
-      id: [AlumnosDialogComponent.nextId++],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      course: [this.cursos],
       regisDate: [new Date()]
     })
   }

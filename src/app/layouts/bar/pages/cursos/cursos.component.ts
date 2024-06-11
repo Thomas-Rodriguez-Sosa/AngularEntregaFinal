@@ -5,6 +5,9 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AlumnosDialogComponent } from './dialog/alumnos-dialog/alumnos-dialog.component';
 import { CursosService } from './cursos.service';
 import { ICursos } from './models';
+import { map } from 'rxjs';
+import { AlumnosService } from '../alumnos/alumnos.service';
+import { Course } from './models/index';
 
 
 @Component({
@@ -13,62 +16,57 @@ import { ICursos } from './models';
   styleUrl: './cursos.component.scss'
 })
 export class CursosComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'course', 'regisDate'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'course', 'regisDate', 'buttons'];
+  alumList: Alumnos[] = [];
 
   cursos: ICursos[] = [];
-$last: any;
+  $last: any;
 
   constructor (private cursosService: CursosService,
     @Inject (MatDialog) private MatDialog: MatDialog
   ) {
-    this.cursos = this.cursosService.getCursos();
   }
 
-  ngOnInit(): void {}
-
-  alumList: Alumnos[] = [{
-    id: 1,
-    firstName: 'Lisandro',
-    lastName: 'Correa',
-    courseId: 1,
-    regisDate: new Date(),
-  },
-  {
-    id: 2,
-    firstName:'Tomas',
-    lastName:'Avendaño',
-    courseId: 2,
-    regisDate: new Date(),
+  ngOnInit(): void {
+    this.cursosService.getAlumnos().subscribe((alumnos) => {
+      this.alumList = alumnos;
+    });
   }
-]
+
 @ViewChild(MatTable) table!: MatTable<Alumnos>;
 
-  addData() {
-    const randomElementIndex = Math.floor(Math.random() * this.alumList.length);
-    this.alumList.push({
-      ...this.alumList[randomElementIndex],
-      courseId: this.alumList[randomElementIndex].courseId,});
-    this.table.renderRows();
+  deleteRow(element: any) {
+    this.cursosService.eliminateAlumno(element).subscribe((result) => {
+      if (result) {
+        const respond = this.alumList.indexOf(element);
+        if (respond === -1) {
+          this.alumList.splice(respond, 1);
+          this.table.renderRows();
+        }
+      }
+    })
   }
 
-  getCourseName(courseId: number): string {
-    const course = this.cursos.find((c) => c.id === courseId)
-    return ''
-  }
-
-  removeData() {
-    this.alumList.pop();
-    this.table.renderRows();
-  }
-
-  openDialog(): void {
-    this.MatDialog.open(AlumnosDialogComponent).afterClosed().subscribe({
+  openDialog(editarAlumno?: Alumnos): void {
+    let dialogRef = this.MatDialog.open(AlumnosDialogComponent, {
+      data: editarAlumno,
+    });
+    dialogRef.afterClosed()
+    .subscribe({
       next: (result) => {
         if (result) {
-          this.alumList = [...this.alumList, result]
+          if (editarAlumno) {
+            this.alumList = this.alumList.map((a) => 
+            a.id === editarAlumno.id ? { ...a, ...result} : a); 
+          } else {
+            this.cursosService.createAlumno(result).subscribe({
+              next: (alumnoCrear) => {
+                this.alumList = [...this.alumList, alumnoCrear];
+              }
+            });
+          }
         }
       }
     })
   }
 }
-

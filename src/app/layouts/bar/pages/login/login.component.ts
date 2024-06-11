@@ -6,6 +6,9 @@ import { AuthService } from '../auth/auth.service';
 import Swal from 'sweetalert2';
 import { Route, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { authActions } from '../../../../store/auth/auth.actions';
+import { Store } from '@ngrx/store';
+import { authUser } from '../../../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +21,12 @@ export class LoginComponent implements OnDestroy, OnInit{
 
   loginForm: FormGroup;
 
+  authUserSubscription?: Subscription;
+
   constructor(private fb: FormBuilder, 
     private authService: AuthService, 
-    private Router: Router ) {
+    private Router: Router, 
+    private store: Store, ) {
     this.loginForm = this.fb.group ({
       nombre: ['', Validators.required],
       contraseña: ['', Validators.required],
@@ -29,36 +35,28 @@ export class LoginComponent implements OnDestroy, OnInit{
     })
   }
 
-  // subscribeToAuthUserChange(): void {
-  //   this.authUserChangeSubscription = this.authService.authProf$.subscribe((authProf: any) => {
-  //     if (authProf != null) {
-  //       this.Router.navigate(['bar']);
-  //     }
-  //   });
-  // }
-
   logIn() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     }
     else {
-    this.authService.logIn(this.loginForm.getRawValue());
+    // this.authService.logIn(this.loginForm.getRawValue());
+    this.store.dispatch(authActions.login({ payload: this.loginForm.getRawValue() }))
     }
   }
 
   ngOnInit(): void {
+    this.authUserSubscription = this.store.select(authUser).subscribe({
+      next: (user) => {
+        if (user) this.Router.navigate(['bar', 'home'])
+      }
+    })
   }
 
   ngOnDestroy(): void {
-      this.authUserChangeSubscription?.unsubscribe();
+      this.authUserSubscription?.unsubscribe();
   }
 
-  // formularioContacto = this.fb.group({
-  //   nombre: this.fb.control('', Validators.required),
-  //   contraseña: this.fb.control('', [Validators.required, Validators.minLength(6)]),
-  //   address: this.fb.control(''),
-  //   email: this.fb.control('', [Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}'), Validators.required]),
-  // });
 
   get emailControl(){
     return this.loginForm.get('email')

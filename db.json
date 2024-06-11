@@ -1,22 +1,30 @@
 {
   "professors": [
-      {
-        "name": "Gojo Satoru",
-        "id": "2c30"
-      },
-      {
-        "name": "Geto Suguru",
-        "id": "2c00"
-      },
-      {
-        "name": "Nanami",
-        "id": "2c10"
-      },
-      {
-        "name": "Sukuna",
-        "id": "2c20"
-      }
-],
+    {
+      "name": "Gojo Satoru",
+      "id": "2c30"
+    },
+    {
+      "name": "Geto Suguru",
+      "id": "2c00"
+    },
+    {
+      "name": "Nanami",
+      "id": "2c10"
+    },
+    {
+      "name": "Sukuna",
+      "id": "2c20"
+    }
+  ],
+  "alumnos": [
+    {
+      "id": "9524",
+      "firstName": "Markd",
+      "lastName": "dasdasd",
+      "regisDate": "2024-06-11T06:15:56.960Z"
+    }
+  ],
   "courses": [],
   "roles": []
 }
